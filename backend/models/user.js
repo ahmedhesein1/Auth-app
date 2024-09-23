@@ -14,5 +14,9 @@ const userSchema = new mongoose.Schema({
     required: [true, "password is required"],
   },
 });
+userSchema.pre("save", async function (next) {
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
 const User = mongoose.model("User", userSchema);
 module.exports = User;
