@@ -10,8 +10,6 @@ exports.signup = asyncHandler(async (req, res, next) => {
     return next(new appError("User is already existed", 401));
   }
   const userModel = new User({ name, email, password });
-  userModel.password = await bcrypt.hash(password, 12);
-  await userModel.save();
   res.status(201).json({
     success: true,
     message: "signup succeded",
