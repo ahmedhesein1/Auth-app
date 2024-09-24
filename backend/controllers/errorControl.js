@@ -2,11 +2,12 @@ const appError = require("./../utils/appError");
 
 const globalErrorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
+  err.status = err.status || "error";
   res.status(err.statusCode).json({
-    status: 'failed',
+    status: "failed",
     statusCode: err.statusCode,
     message: err.message,
-  })
+    stack: err.stack,
+  });
 };
 module.exports = globalErrorHandler;
