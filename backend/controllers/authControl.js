@@ -17,7 +17,7 @@ exports.signup = asyncHandler(async (req, res, next) => {
   });
   next(new appError("signup failed", 400));
 });
-exports.login = async (req, res, next) => {
+exports.login =asyncHandler( async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   const isPasswordEqual = await bcrypt.compare(password, user.password);
@@ -39,4 +39,4 @@ exports.login = async (req, res, next) => {
     name: user.name,
   });
   next(new appError("login failed", 404));
-};
+});
